@@ -2,22 +2,21 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Restaurant } from '../../screens/home/restaurantData';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 interface FavoriteCardProps {
   item: Restaurant;
-  onPress?: () => void;
-  onFavoritePress?: () => void;
   isFavorited?: boolean;
+  onFavoritePress?: () => void;
 }
 
 export default function FavoriteCard({
   item,
-  onPress,
-  onFavoritePress,
   isFavorited = true,
 }: FavoriteCardProps) {
+  const navigation = useNavigation<any>();
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.85}>
+    <TouchableOpacity style={styles.card} onPress={() => { navigation.navigate("Food", { id: item?.id }) }} activeOpacity={0.85}>
       {/* Image */}
       <View style={styles.imageContainer}>
         <Image source={{ uri: item.image }} style={styles.image} />
@@ -30,7 +29,7 @@ export default function FavoriteCard({
       <View style={styles.info}>
         <View style={styles.topRow}>
           <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
-          <TouchableOpacity onPress={onFavoritePress} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+          <TouchableOpacity onPress={() => { }} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
             <Ionicons
               name={isFavorited ? 'heart' : 'heart-outline'}
               size={18}
@@ -76,9 +75,6 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: 'rgba(0,0,0,0.07)',
   },
-
-
-
   imageContainer: {
     width: '100%',
     height: 120,

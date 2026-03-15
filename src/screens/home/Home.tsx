@@ -8,84 +8,123 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { styles } from "./homeStyle";
 import { dataSet } from "./restaurantData";
 import FavoriteCard from "../../components/cards/FavoriteCard";
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { styles } from "./homeStyle";
-
-
+import PopularCard from "@/components/cards/PopularCard";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [toggleFavorite, setToggleFavorite] = useState(false);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
-  const favorite = dataSet.find((d) => d.type === "favorite");
+  const favorite = dataSet.find((d) => d.type === "favorite")?.data || [];
+  const popular = dataSet.find((d) => d.type === "popular")?.data || [];
+  const recommended = dataSet.find((d) => d.type === "recommended")?.data || [];
+
+  const toggleFavorite = (id: string) => {
+    setFavorites((prev) => {
+      const newSet = new Set(prev);
+      newSet.has(id) ? newSet.delete(id) : newSet.add(id);
+      return newSet;
+    });
+  };
 
   return (
-    <View>
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
-      <ScrollView
-        showsVerticalScrollIndicator={true}
-      >
-        {/* ── Header ── */}
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.greeting}>Good morning 👋</Text>
-            <Text style={styles.headline}>Find the best restaurants near you</Text>
-          </View>
-
-          <TouchableOpacity style={styles.notifBtn}>
-            <Icon name="notifications-circle-outline" size={22} color="#1a1a1a" />
-            <View style={styles.notifDot} />
-          </TouchableOpacity>
+      {/* Header */}
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.greeting}>Good morning 👋</Text>
+          <Text style={styles.headline}>
+            Find the best restaurants near you
+          </Text>
         </View>
 
-        {/* ── Search Bar ── */}
-        <View style={styles.searchWrapper}>
-          <Icon name="search" size={18} color="#aaa" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search restaurants, cuisines..."
-            placeholderTextColor="#bbb"
-            value={search}
-            onChangeText={setSearch}
-          />
-          {search.length > 0 && (
-            <TouchableOpacity onPress={() => setSearch("")}>
-              <Icon name="close-circle" size={18} color="#bbb" />
-            </TouchableOpacity>
-          )}
-        </View>
+        <TouchableOpacity style={styles.notifBtn}>
+          <Icon name="bell" size={22} color="#1a1a1a" />
+          <View style={styles.notifDot} />
+        </TouchableOpacity>
+      </View>
 
-        {/* ── Favourites ── */}
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>My Favourites</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAll}>See all</Text>
-          </TouchableOpacity>
-        </View>
-
-        <FlatList
-          data={favorite?.data}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainerStyle}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.favoriteCardWrap}>
-              <FavoriteCard
-                item={item}
-                isFavorited={favorites.has(item.id)}
-                onFavoritePress={() => setToggleFavorite(!toggleFavorite)}
-              />
-            </View>
-          )}
+      {/* Search Bar */}
+      <View style={styles.searchWrapper}>
+        <Icon name="search" size={18} color="#aaa" style={styles.searchIcon} />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search restaurants, cuisines..."
+          placeholderTextColor="#bbb"
+          value={search}
+          onChangeText={setSearch}
         />
-      </ScrollView>
+        {search.length > 0 && (
+          <TouchableOpacity onPress={() => setSearch("")}>
+            <Icon name="close" size={18} color="#bbb" />
+          </TouchableOpacity>
+        )}
+      </View>
 
-    </View>
+      {/* ── Favourites ── */}
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>My Favourites</Text>
+        <TouchableOpacity>
+          <Text style={styles.seeAll}>See all</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={favorite}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.contentContainerStyle}
+        renderItem={({ item }) => (
+          <View style={styles.favoriteCardWrap}>
+            <FavoriteCard
+              item={item}
+              isFavorited={favorites.has(item.id)}
+              onFavoritePress={() => toggleFavorite(item.id)}
+            />
+          </View>
+        )}
+      />
+
+      {/* ── Popular Near You ── */}
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>Popular Near You</Text>
+        <TouchableOpacity>
+          <Text style={styles.seeAll}>See all</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.grid}>
+        <View style={styles.grid}>
+          {popular.map((item) => (
+            <View key={item.id} style={styles.gridItem}>
+              <PopularCard item={item} />
+            </View>
+          ))}
+        </View>
+      </View>
+
+      {/* ── Recommended For You ── */}
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>Recommended For You</Text>
+        <TouchableOpacity>
+          <Text style={styles.seeAll}>See all</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.grid}>
+        <View style={styles.grid}>
+          {recommended.map((item) => (
+            <View key={item.id} style={styles.gridItem}>
+              <PopularCard item={item} />
+            </View>
+          ))}
+        </View>
+      </View>
+
+      <View style={styles.bottomPad} />
+    </ScrollView>
   );
 }
-

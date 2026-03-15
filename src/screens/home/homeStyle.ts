@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
   searchWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#f7f7f5",
+    backgroundColor: "#fcf0f0ff",
     borderRadius: 14,
     marginBottom: 24,
     borderWidth: 0.5,
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     color: "#1a1a1a",
-    padding: 0,
+    padding: 12,
   },
 
   // Section headers
@@ -71,8 +71,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 20,
-    marginBottom: 12,
+    marginVertical: 10,
   },
   sectionTitle: {
     fontSize: 18,
@@ -116,18 +115,15 @@ export const styles = StyleSheet.create({
     color: "#fff",
   },
 
-  // Popular grid
-  gridWrapper: {
-    paddingHorizontal: 16,
-    marginBottom: 24,
-  },
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 12,
+    gap: 10,
   },
   gridItem: {
     width: "47.5%",
+    height: "100%",
+    marginBottom: 10,
   },
 
   // Empty state
