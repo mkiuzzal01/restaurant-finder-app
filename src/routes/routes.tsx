@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createStaticNavigation } from "@react-navigation/native";
-
 import Tabs from "./tabs";
 import RestaurantDetails from "@/screens/restaurant/RestaurantDetails";
 import FoodDetails from "@/screens/food/FoodDetails";
@@ -14,9 +13,18 @@ const rootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
-
-    Restaurants: RestaurantDetails,
-    Food: FoodDetails,
+    Restaurants: {
+      screen: RestaurantDetails,
+      options: {
+        headerShown: false,
+      },
+    },
+    Food: {
+      screen: FoodDetails,
+      options: {
+        headerShown: false,
+      },
+    },
   },
 });
 

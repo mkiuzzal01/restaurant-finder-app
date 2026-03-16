@@ -1,11 +1,11 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { foodData } from "./FoodData";
 import { styles } from "./style.food";
 
 export default function FoodDetails() {
   return (
-    <View style={styles.container}>
+    <View>
       <Image source={{ uri: foodData.image }} style={styles.image} />
 
       <View style={styles.info}>

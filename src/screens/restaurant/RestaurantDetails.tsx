@@ -4,61 +4,60 @@ import { details, foodData } from "./restaurant-details";
 import FavoriteCard from "@/components/cards/FavoriteCard";
 import { styles } from "./style.Details";
 
-export default function RestaurantDetails({ route }: { route: any }) {
-  const { id } = route.params;
+export default function RestaurantDetails() {
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.container}>
+      <View>
+        <Image source={{ uri: details.image }} style={styles.image} />
+        <View style={{ paddingVertical: 20 }}>
+          <Text style={styles.title}>{details.name}</Text>
 
-      {/* Restaurant Image */}
-      <Image source={{ uri: details.image }} style={styles.image} />
+          <View style={styles.row}>
+            <Text style={styles.rating}>⭐ {details.rating}</Text>
+            <Text style={styles.text}>{details.distance}</Text>
+            <Text style={styles.text}>{details.price}</Text>
+          </View>
 
-      {/* Restaurant Info */}
-      <View style={styles.infoContainer}>
-        <Text style={styles.title}>{details.name}</Text>
+          <Text style={styles.category}>{details.category}</Text>
 
-        <View style={styles.row}>
-          <Text style={styles.rating}>⭐ {details.rating}</Text>
-          <Text style={styles.text}>{details.distance}</Text>
-          <Text style={styles.text}>{details.price}</Text>
-        </View>
+          {details.deliveryTime && (
+            <Text style={styles.delivery}>Delivery: {details.deliveryTime}</Text>
+          )}
 
-        <Text style={styles.category}>{details.category}</Text>
+          {details.isTrending && (
+            <Text style={styles.trending}>🔥 Trending Restaurant</Text>
+          )}
 
-        {details.deliveryTime && (
-          <Text style={styles.delivery}>Delivery: {details.deliveryTime}</Text>
-        )}
-
-        {details.isTrending && (
-          <Text style={styles.trending}>🔥 Trending Restaurant</Text>
-        )}
-
-        {/* Tags */}
-        <View style={styles.tagContainer}>
-          {details.tags?.map((tag, index) => (
-            <View key={index} style={styles.tag}>
-              <Text style={styles.tagText}>{tag}</Text>
-            </View>
-          ))}
+          {/* Tags */}
+          <View style={styles.tagContainer}>
+            {details.tags?.map((tag, index) => (
+              <View key={index} style={styles.tag}>
+                <Text style={styles.tagText}>{tag}</Text>
+              </View>
+            ))}
+          </View>
         </View>
       </View>
 
       {/* Menu Section */}
-      <View style={styles.menuContainer}>
+      <View>
         <Text style={styles.menuTitle}>List of Foods</Text>
 
         <FlatList
           data={foodData}
-          numColumns={2}
-          scrollEnabled={false}
+          horizontal
+          showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id}
-          columnWrapperStyle={{ gap: 5, justifyContent: "space-between" }}
+          contentContainerStyle={styles.grid}
           renderItem={({ item }) => (
-            <FavoriteCard
-              item={item}
-              isFavorited={false}
-              onFavoritePress={() => { }}
-            />
+            <View>
+              <FavoriteCard
+                item={item}
+                isFavorited={false}
+                onFavoritePress={() => { }}
+              />
+            </View>
           )}
         />
       </View>

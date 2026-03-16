@@ -3,93 +3,94 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
 
   image: {
     width: "100%",
-    height: 250,
+    height: 260,
   },
 
-  infoContainer: {
-    padding: 20,
-  },
 
   title: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: "700",  
+    color: "#111",
     marginBottom: 10,
   },
 
   row: {
     flexDirection: "row",
-    gap: 15,
+    alignItems: "center",
+    gap: 12,
     marginBottom: 10,
   },
 
   rating: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: "600",
+    color: "#222",
   },
 
   text: {
-    fontSize: 16,
-    color: "#555",
+    fontSize: 14,
+    color: "#666",
   },
 
   category: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: 16,
+    color: "#333",
+    marginBottom: 8,
   },
 
   delivery: {
-    fontSize: 16,
-    color: "#444",
-    marginBottom: 10,
+    fontSize: 14,
+    color: "#555",
+    marginBottom: 8,
   },
 
   trending: {
-    color: "#ff6600",
-    fontWeight: "bold",
+    color: "#FF6B00",
+    fontWeight: "600",
+    fontSize: 14,
     marginBottom: 10,
   },
+
+  /* Tags */
 
   tagContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 10,
+    marginTop: 8,
   },
 
   tag: {
-    backgroundColor: "#f2f2f2",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 8,
+    backgroundColor: "#F4F4F4",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
     marginRight: 8,
     marginBottom: 8,
   },
 
   tagText: {
-    fontSize: 13,
+    fontSize: 12,
+    color: "#444",
+    fontWeight: "500",
   },
-  menuContainer: {
-    marginTop: 20,
-  },
+
 
   menuTitle: {
     fontSize: 20,
     fontWeight: "700",
     marginBottom: 16,
-    color: "#1a1a1a",
+    color: "#111",
   },
+
   grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 10,
-    paddingHorizontal: 16,
+    gap: 14,
   },
 
   gridItem: {
-    width: "48%",
+    width: "47.5%",
   },
 });

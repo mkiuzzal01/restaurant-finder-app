@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./homeStyle";
 import { dataSet } from "./restaurantData";
 import FavoriteCard from "../../components/cards/FavoriteCard";
@@ -31,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <ScrollView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       {/* Header */}
@@ -44,14 +44,14 @@ export default function Home() {
         </View>
 
         <TouchableOpacity style={styles.notifBtn}>
-          <Icon name="bell" size={22} color="#1a1a1a" />
+          <FontAwesome name="bell" size={22} color="#1a1a1a" />
           <View style={styles.notifDot} />
         </TouchableOpacity>
       </View>
 
       {/* Search Bar */}
       <View style={styles.searchWrapper}>
-        <Icon name="search" size={18} color="#aaa" style={styles.searchIcon} />
+        <FontAwesome name="search" size={18} color="#aaa" style={styles.searchIcon} />
         <TextInput
           style={styles.searchInput}
           placeholder="Search restaurants, cuisines..."
@@ -61,7 +61,7 @@ export default function Home() {
         />
         {search.length > 0 && (
           <TouchableOpacity onPress={() => setSearch("")}>
-            <Icon name="close" size={18} color="#bbb" />
+            <FontAwesome name="close" size={18} color="#bbb" style={styles.searchIcon} />
           </TouchableOpacity>
         )}
       </View>
@@ -80,7 +80,7 @@ export default function Home() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.contentContainerStyle}
         renderItem={({ item }) => (
-          <View style={styles.favoriteCardWrap}>
+          <View style={styles.contentContainerStyle}>
             <FavoriteCard
               item={item}
               isFavorited={favorites.has(item.id)}

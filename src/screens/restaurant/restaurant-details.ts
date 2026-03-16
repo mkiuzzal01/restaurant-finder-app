@@ -12,7 +12,7 @@ export interface Restaurant {
 }
 
 export const details: Restaurant = {
-  id: "fav-2",
+  id: "1",
   name: "Harbour Bites",
   image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
   rating: 4.6,
@@ -26,7 +26,7 @@ export const details: Restaurant = {
 
 export const foodData = [
   {
-    id: "fav-2",
+    id: "1",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -38,7 +38,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "2",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -50,7 +50,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "3",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -62,7 +62,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "4",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -74,7 +74,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "5",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -86,7 +86,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "6",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -98,7 +98,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "7",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -110,7 +110,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "8",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -122,7 +122,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "9",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -134,7 +134,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "10",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -146,7 +146,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "11",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -158,7 +158,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "12",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,
@@ -170,7 +170,7 @@ export const foodData = [
     tags: ["Seafood", "Grills", "Fine Dining"],
   },
   {
-    id: "fav-2",
+    id: "13",
     name: "Harbour Bites",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400",
     rating: 4.6,

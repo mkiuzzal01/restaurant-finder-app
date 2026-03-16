@@ -6,27 +6,26 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    paddingBottom: 20,
-    paddingTop: 20,
+    paddingVertical: 20,
   },
 
   greeting: {
-    fontSize: 14,
-    color: "#888",
+    fontSize: 20,
+    color: "#E8692A",
     marginBottom: 4,
   },
 
   headline: {
-    fontSize: 26,
-    fontWeight: "700",
+    fontSize: 24,
+    fontWeight: "800",
     color: "#1a1a1a",
-    width: "80%",
     lineHeight: 32,
+    width: "80%",
   },
   notifBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: "#f5f5f5",
     alignItems: "center",
     justifyContent: "center",
@@ -43,9 +42,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: "#fff",
   },
-  contentContainerStyle: {
-    gap: 12,
-  },
 
   searchWrapper: {
     flexDirection: "row",
@@ -57,7 +53,7 @@ export const styles = StyleSheet.create({
     borderColor: "rgba(0,0,0,0.07)",
   },
   searchIcon: {
-    marginRight: 8,
+    paddingHorizontal: 12,
   },
   searchInput: {
     flex: 1,
@@ -66,7 +62,6 @@ export const styles = StyleSheet.create({
     padding: 12,
   },
 
-  // Section headers
   sectionHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -84,11 +79,10 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
   },
 
-  favoriteCardWrap: {
-    width: 250,
+  contentContainerStyle: {
+    gap: 10,
   },
 
-  // Category chips
   categoryList: {
     paddingHorizontal: 20,
     paddingBottom: 16,
@@ -123,7 +117,6 @@ export const styles = StyleSheet.create({
   gridItem: {
     width: "47.5%",
     height: "100%",
-    marginBottom: 10,
   },
 
   // Empty state
