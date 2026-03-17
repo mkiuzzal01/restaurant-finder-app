@@ -3,6 +3,7 @@ import { createStaticNavigation } from "@react-navigation/native";
 import Tabs from "./tabs";
 import RestaurantDetails from "@/screens/restaurant/RestaurantDetails";
 import FoodDetails from "@/screens/food/FoodDetails";
+import Favorites from "@/screens/favorites/Favorites";
 
 const rootStack = createNativeStackNavigator({
   initialRouteName: "Tabs",
@@ -25,7 +26,13 @@ const rootStack = createNativeStackNavigator({
         headerShown: false,
       },
     },
-  },
+    Favorites: {
+      screen: Favorites,
+      options: {
+        headerShown: false,
+      },
+    }
+  }
 });
 
 const Navigation = createStaticNavigation(rootStack);

@@ -1,20 +1,27 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ToastAndroid } from 'react-native';
 import { Restaurant } from '../../screens/home/restaurantData';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks/hooks';
+import { addToWishList } from '@/redux/Features/wishlist/wishListSlice';
 
 interface FavoriteCardProps {
   item: Restaurant;
-  isFavorited?: boolean;
-  onFavoritePress?: () => void;
 }
 
-export default function FavoriteCard({
-  item,
-  isFavorited = true,
-}: FavoriteCardProps) {
+export default function FavoriteCard({ item }: FavoriteCardProps) {
   const navigation = useNavigation<any>();
+  const dispatch = useAppDispatch();
+  const { items } = useAppSelector((state) => state.wishList);
+
+  const isFavorited = items.some((i) => i.id === item.id);
+
+  const handleFavoritePress = () => {
+    dispatch(addToWishList({ id: item.id, name: item.name, image: item.image, price: item.price }));
+    ToastAndroid.show("Added to wishlist", ToastAndroid.SHORT);
+  };
+
   return (
     <TouchableOpacity style={styles.card} onPress={() => { navigation.navigate("Food", { id: item?.id }) }} activeOpacity={0.85}>
       {/* Image */}
@@ -29,7 +36,7 @@ export default function FavoriteCard({
       <View style={styles.info}>
         <View style={styles.topRow}>
           <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
-          <TouchableOpacity onPress={() => { }} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+          <TouchableOpacity onPress={handleFavoritePress} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
             <Ionicons
               name={isFavorited ? 'heart' : 'heart-outline'}
               size={18}
@@ -50,10 +57,10 @@ export default function FavoriteCard({
           <View style={styles.metaRow}>
             <Text style={styles.meta}>{item.distance} km</Text>
             <Text style={styles.dot}>•</Text>
-            <Text style={styles.meta}>{item.price}</Text>
+            <Text style={styles.meta}>৳ {item.price}</Text>
           </View>
           <View style={styles.timeBadge}>
-            <Text style={styles.timeBadgeText}>20–30 min</Text>
+            <Text style={styles.timeBadgeText}>{item.deliveryTime}</Text>
           </View>
         </View>
       </View>
@@ -120,6 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 8,
+    gap: 10,
   },
   rating: {
     fontSize: 13,
@@ -144,6 +152,7 @@ const styles = StyleSheet.create({
   bottomRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 10,
     justifyContent: 'space-between',
   },
   metaRow: {

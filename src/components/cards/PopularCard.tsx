@@ -1,8 +1,8 @@
 import { Restaurant } from "@/screens/home/restaurantData";
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 
 interface PopularCardProps {
@@ -23,7 +23,7 @@ export default function PopularCard({ item, }: PopularCardProps) {
         <View style={styles.detailsRow}>
           {/* Rating */}
           <View style={styles.rating}>
-            <Icon name="star" size={14} color="#FFD700" />
+            <Ionicons name="star" size={14} color="#FFD700" />
             <Text style={styles.ratingText}>{item.rating.toFixed(1)}</Text>
           </View>
 
@@ -31,7 +31,7 @@ export default function PopularCard({ item, }: PopularCardProps) {
           <Text style={styles.detailText}>{item.distance}</Text>
 
           {/* Price */}
-          <Text style={styles.detailText}>{item.price}</Text>
+          <Text style={styles.detailText}>৳ {item.price}</Text>
         </View>
 
         {/* Category */}
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   detailsRow: {
     flexDirection: "row",
     alignItems: "center",
+    gap: 10,
     marginBottom: 6,
   },
   rating: {
