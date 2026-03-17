@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,29 +7,46 @@ import {
   ScrollView,
   TouchableOpacity,
   StatusBar,
+  ActivityIndicator,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./homeStyle";
-import { dataSet } from "./restaurantData";
+import { Restaurant, dataSet } from "./restaurantData";
 import FavoriteCard from "../../components/cards/FavoriteCard";
 import PopularCard from "@/components/cards/PopularCard";
 
 export default function Home() {
+  const [favorite, setFavorite] = useState<Restaurant[]>([]);
+  const [popular, setPopular] = useState<Restaurant[]>([]);
+  const [recommended, setRecommended] = useState<Restaurant[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
-  const favorite = dataSet.find((d) => d.type === "favorite")?.data || [];
-  const popular = dataSet.find((d) => d.type === "popular")?.data || [];
-  const recommended = dataSet.find((d) => d.type === "recommended")?.data || [];
+  useEffect(() => {
+    setIsLoading(true);
+    try {
 
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => {
-      const newSet = new Set(prev);
-      newSet.has(id) ? newSet.delete(id) : newSet.add(id);
-      return newSet;
-    });
-  };
+      setFavorite(dataSet.find((d) => d.type === "favorite")?.data || []);
+      setPopular(dataSet.find((d) => d.type === "popular")?.data || []);
+      setRecommended(dataSet.find((d) => d.type === "recommended")?.data || []);
 
+    } catch (error) {
+      console.log("Error loading items:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+
+
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#E8692A" />
+      </View>
+    );
+  }
   return (
     <ScrollView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -81,11 +98,7 @@ export default function Home() {
         contentContainerStyle={styles.contentContainerStyle}
         renderItem={({ item }) => (
           <View style={styles.contentContainerStyle}>
-            <FavoriteCard
-              item={item}
-              isFavorited={favorites.has(item.id)}
-              onFavoritePress={() => toggleFavorite(item.id)}
-            />
+            <FavoriteCard item={item} />
           </View>
         )}
       />

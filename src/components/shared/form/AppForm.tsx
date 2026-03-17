@@ -1,16 +1,14 @@
-"use client";
-
 import React from "react";
 import {
   FieldValues,
   FormProvider,
-  SubmitHandler,
   useForm,
   UseFormProps,
+  SubmitHandler,
 } from "react-hook-form";
+import { ScrollView } from "react-native";
 
-interface AppFormProps<T extends FieldValues = FieldValues>
-  extends UseFormProps<T> {
+interface AppFormProps<T extends FieldValues = FieldValues> extends UseFormProps<T> {
   children: React.ReactNode;
   onSubmit: (values: T, reset: () => void) => void | Promise<void>;
 }
@@ -21,13 +19,11 @@ const AppForm = <T extends FieldValues>({
   resolver,
   defaultValues,
 }: AppFormProps<T>) => {
-  // Initialize form methods
   const methods = useForm<T>({
     resolver,
     defaultValues,
   });
 
-  // Wrap submission to include reset function
   const handleFormSubmit: SubmitHandler<T> = async (values) => {
     try {
       await onSubmit(values, methods.reset);
@@ -38,9 +34,16 @@ const AppForm = <T extends FieldValues>({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleFormSubmit)}>
-        {children}
-      </form>
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 24, paddingHorizontal: 16 }}
+      >
+        {React.Children.map(children, (child) =>
+          React.isValidElement(child)
+            ? React.cloneElement(child as React.ReactElement<any>, { handleSubmit: methods.handleSubmit(handleFormSubmit) })
+            : child
+        )}
+      </ScrollView>
     </FormProvider>
   );
 };

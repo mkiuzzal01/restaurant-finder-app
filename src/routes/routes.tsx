@@ -4,6 +4,7 @@ import Tabs from "./tabs";
 import RestaurantDetails from "@/screens/restaurant/RestaurantDetails";
 import FoodDetails from "@/screens/food/FoodDetails";
 import Favorites from "@/screens/favorites/Favorites";
+import Checkout from "@/screens/checkout/Checkout";
 
 const rootStack = createNativeStackNavigator({
   initialRouteName: "Tabs",
@@ -28,6 +29,12 @@ const rootStack = createNativeStackNavigator({
     },
     Favorites: {
       screen: Favorites,
+      options: {
+        headerShown: false,
+      },
+    },
+    Checkout: {
+      screen: Checkout,
       options: {
         headerShown: false,
       },

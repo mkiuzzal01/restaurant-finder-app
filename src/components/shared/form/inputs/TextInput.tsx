@@ -14,6 +14,7 @@ import {
   StyleSheet,
   TextInputProps as RNTextInputProps,
 } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 interface TextInputProps<T extends FieldValues>
   extends Omit<RNTextInputProps, "name"> {
@@ -36,56 +37,71 @@ const TextInput = forwardRef<RNTextInput, TextInputProps<any>>(
         name={name}
         control={control}
         rules={{ required }}
-        render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => {
-          return (
-            <View style={[styles.container, containerStyle]}>
-              {label && (
-                <Text style={styles.label}>
-                  {label}
-                  {required && <Text style={styles.required}> *</Text>}
-                </Text>
+        render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+          <View style={[styles.container, containerStyle]}>
+            {/* Label */}
+            {label && (
+              <Text style={styles.label}>
+                {label}
+                {required && <Text style={styles.required}> *</Text>}
+              </Text>
+            )}
+
+            {/* Input Field */}
+            <View style={styles.inputWrapper}>
+              <RNTextInput
+                ref={ref}
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                secureTextEntry={isPassword && !showPassword}
+                keyboardType={
+                  type === "email"
+                    ? "email-address"
+                    : type === "number"
+                      ? "numeric"
+                      : "default"
+                }
+                style={[
+                  styles.input,
+                  inputStyle,
+                  error && styles.inputError,
+                  isPassword && { paddingRight: 60 },
+                ]}
+                {...props}
+              />
+
+              {isPassword && (
+                <TouchableOpacity
+                  onPress={() => setShowPassword((prev) => !prev)}
+                  style={styles.toggleButton}
+                >
+                  <FontAwesome name={showPassword ? "eye-slash" : "eye"} size={24} color="black" />
+                </TouchableOpacity>
               )}
-
-              <View style={styles.inputWrapper}>
-                <RNTextInput
-                  ref={ref}
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  secureTextEntry={isPassword && !showPassword}
-                  keyboardType={type === "email" ? "email-address" : type === "number" ? "numeric" : "default"}
-                  style={[styles.input, inputStyle, error && styles.inputError, isPassword && { paddingRight: 60 }]}
-                  {...props}
-                />
-
-                {isPassword && (
-                  <TouchableOpacity
-                    onPress={() => setShowPassword((prev) => !prev)}
-                    style={styles.toggleButton}
-                  >
-                    <Text style={styles.toggleText}>{showPassword ? "Hide" : "Show"}</Text>
-                  </TouchableOpacity>
-                )}
-              </View>
-
-              {error && <Text style={styles.error}>{error.message || "This field is required"}</Text>}
             </View>
-          );
-        }}
+
+            {/* Error Message */}
+            {error && (
+              <Text style={styles.error}>
+                {error.message || "This field is required"}
+              </Text>
+            )}
+          </View>
+        )}
       />
     );
   }
 );
 
 TextInput.displayName = "TextInput";
-
 export default TextInput;
 
 const styles = StyleSheet.create({
   container: { marginBottom: 16 },
   label: { fontSize: 14, fontWeight: "500", marginBottom: 4, color: "#333" },
   required: { color: "red" },
-  inputWrapper: { position: "relative" },
+  inputWrapper: { position: "relative", justifyContent: "center" },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -100,7 +116,6 @@ const styles = StyleSheet.create({
   toggleButton: {
     position: "absolute",
     right: 14,
-    top: 12,
     height: "100%",
     justifyContent: "center",
   },
