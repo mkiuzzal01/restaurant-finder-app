@@ -24,7 +24,7 @@ export default function StorageLoader({ children }: { children: React.ReactNode 
     };
 
     loadCart();
-  }, []);
+  }, [children]);
 
   return <>{children}</>;
 }
