@@ -137,7 +137,7 @@ export default function TabsNavigator() {
 
 const styles = StyleSheet.create({
   tabBar: {
-    position: "absolute",
+    position: "relative",
     backgroundColor: "#ffffff",
     borderTopWidth: 0,
     elevation: 16,

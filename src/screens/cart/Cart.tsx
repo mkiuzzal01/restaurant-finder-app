@@ -10,6 +10,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart, removeFromCart, updateQuantity } from '@/redux/Features/cart/cartSlice';
 import { useNavigation } from '@react-navigation/native';
+import { styles } from './style.cart';
 
 export default function Cart() {
   const navigation = useNavigation<any>();
@@ -57,8 +58,7 @@ export default function Cart() {
           </TouchableOpacity>
         </View>
       </View>
-
-      {/* Right: Remove */}
+      {/* Remove Button */}
       <TouchableOpacity
         style={styles.removeBtn}
         onPress={() => dispatch(removeFromCart(item.id))}
@@ -104,65 +104,4 @@ export default function Cart() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: "#f9f9f9" },
-  card: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 12,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  image: { width: 60, height: 60, borderRadius: 8, marginRight: 12 },
-  info: { flex: 1 },
-  name: { fontSize: 16, fontWeight: "500", color: "#111" },
-  price: { fontSize: 14, fontWeight: "400", color: "#666", marginVertical: 4 },
-  qtyContainer: { flexDirection: "row", alignItems: "center", marginTop: 4 },
-  qtyBtn: {
-    width: 32,
-    height: 32,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 6,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  qtyText: { fontSize: 16, fontWeight: "600", color: "#333" },
-  qty: { marginHorizontal: 12, fontSize: 16, fontWeight: "500" },
-  removeBtn: {
-    marginLeft: 12,
-    padding: 4,
-    borderRadius: 6,
-    backgroundColor: "#ffe6e6",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  remove: { color: "#ff5a5f", fontWeight: "700", fontSize: 16 },
-  emptyContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
-  emptyText: { fontSize: 18, color: "#888", fontWeight: "500" },
-  footer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 16,
-    borderTopWidth: 1,
-    borderTopColor: "#eee",
-  },
-  totalLabel: { fontSize: 16, fontWeight: "500", color: "#333" },
-  total: { fontSize: 18, fontWeight: "700", color: "#111", marginTop: 2 },
-  checkoutBtn: {
-    backgroundColor: "#ff5a5f",
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-  },
-  checkoutText: { color: "#fff", fontSize: 16, fontWeight: "600" },
-  clearContainer: { marginTop: 12, alignItems: "center" },
-  clear: { color: "#ff5a5f", fontSize: 14, fontWeight: "600" },
-});
+
