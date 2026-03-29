@@ -10,7 +10,7 @@ interface FavoriteCardProps {
   item: Restaurant;
 }
 
-export default function FavoriteCard({ item }: FavoriteCardProps) {
+export default function FoodCard({ item }: FavoriteCardProps) {
   const navigation = useNavigation<any>();
   const dispatch = useAppDispatch();
   const { items } = useAppSelector((state) => state.wishList);

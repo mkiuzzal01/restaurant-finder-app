@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
 
   title: {
     fontSize: 24,
-    fontWeight: "700",  
+    fontWeight: "700",
     color: "#111",
     marginBottom: 10,
   },
@@ -23,6 +23,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
     marginBottom: 10,
+  },
+
+  seeAll: {
+    color: "#FF6B35",
+    fontWeight: "600",
+    fontSize: 14,
   },
 
   rating: {

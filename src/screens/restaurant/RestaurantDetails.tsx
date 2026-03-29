@@ -1,16 +1,19 @@
 import React from "react";
-import { View, Text, Image, ScrollView, FlatList } from "react-native";
+import { View, Text, Image, ScrollView, FlatList, Button, TouchableOpacity } from "react-native";
 import { details, foodData } from "./restaurant-details";
-import FavoriteCard from "@/components/cards/FavoriteCard";
+import FoodCard from "@/components/cards/FoodCard";
 import { styles } from "./style.Details";
+import SectionHeader from "@/components/shared/SectionHeader";
+import { useNavigation } from "@react-navigation/native";
 
 export default function RestaurantDetails() {
+  const navigation = useNavigation<any>();
 
   return (
     <ScrollView style={styles.container}>
       <View>
         <Image source={{ uri: details.image }} style={styles.image} />
-        <View style={{ paddingVertical: 20 }}>
+        <View style={{ paddingVertical: 20, paddingHorizontal: 10 }}>
           <Text style={styles.title}>{details.name}</Text>
 
           <View style={styles.row}>
@@ -41,9 +44,8 @@ export default function RestaurantDetails() {
       </View>
 
       {/* Menu Section */}
-      <View>
-        <Text style={styles.menuTitle}>List of Foods</Text>
-
+      <View >
+        <SectionHeader title="List of Foods" onPress={() => { navigation.navigate("AllFoods", { type: "food" }) }} />
         <FlatList
           data={foodData}
           horizontal
@@ -51,15 +53,15 @@ export default function RestaurantDetails() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.grid}
           renderItem={({ item }) => (
-            <View>
-              <FavoriteCard
-                item={item}
-                isFavorited={false}
-                onFavoritePress={() => { }}
-              />
-            </View>
+            <FoodCard
+              item={item}
+            />
           )}
         />
+      </View>
+
+      <View>
+
       </View>
 
     </ScrollView>

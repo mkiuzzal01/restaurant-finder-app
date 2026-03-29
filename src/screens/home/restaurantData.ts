@@ -333,3 +333,13 @@ export const dataSet: dataSet[] = [
     ],
   },
 ];
+
+
+export const CATEGORIES = [
+  { id: "all", label: "All", icon: "home-outline" },
+  { id: "pizza", label: "Pizza", emoji: "🍕" },
+  { id: "sushi", label: "Sushi", emoji: "🍣" },
+  { id: "burgers", label: "Burgers", emoji: "🍔" },
+  { id: "salads", label: "Salads", emoji: "🥗" },
+  { id: "cafe", label: "Café", emoji: "☕" },
+];

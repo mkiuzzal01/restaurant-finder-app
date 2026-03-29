@@ -1,42 +1,53 @@
+import RestaurantCard from "@/components/cards/RestaurantCard";
+import SectionHeader from "@/components/shared/SectionHeader";
+import { COLORS } from "@/style/Colors";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  TextInput,
+  ActivityIndicator,
   FlatList,
   ScrollView,
-  TouchableOpacity,
   StatusBar,
-  ActivityIndicator,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./homeStyle";
-import { Restaurant, dataSet } from "./restaurantData";
-import FavoriteCard from "../../components/cards/FavoriteCard";
-import PopularCard from "@/components/cards/PopularCard";
+import { CATEGORIES, Restaurant, dataSet } from "./restaurantData";
+
 
 export default function Home() {
-  const [favorite, setFavorite] = useState<Restaurant[]>([]);
-  const [popular, setPopular] = useState<Restaurant[]>([]);
-  const [recommended, setRecommended] = useState<Restaurant[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation<any>();
+  const [sections, setSections] = useState({
+    favorite: [] as Restaurant[],
+    popular: [] as Restaurant[],
+    recommended: [] as Restaurant[],
+  });
+  const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => {
-    setIsLoading(true);
+    loadData();
+  }, []);
+
+  const loadData = () => {
     try {
-
-      setFavorite(dataSet.find((d) => d.type === "favorite")?.data || []);
-      setPopular(dataSet.find((d) => d.type === "popular")?.data || []);
-      setRecommended(dataSet.find((d) => d.type === "recommended")?.data || []);
-
+      const getData = (type: string) =>
+        dataSet.find((d) => d.type === type)?.data || [];
+      setSections({
+        favorite: getData("favorite"),
+        popular: getData("popular"),
+        recommended: getData("recommended"),
+      });
     } catch (error) {
       console.log("Error loading items:", error);
     } finally {
       setIsLoading(false);
     }
-  }, []);
-
+  };
 
 
 
@@ -47,97 +58,118 @@ export default function Home() {
       </View>
     );
   }
-  return (
-    <ScrollView style={{ flex: 1 }}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
-      {/* Header */}
+
+
+  return (
+    <ScrollView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      {/* ── Header ── */}
       <View style={styles.header}>
         <View>
-          <Text style={styles.greeting}>Good morning 👋</Text>
-          <Text style={styles.headline}>
-            Find the best restaurants near you
-          </Text>
+          <View style={styles.greetingTag}>
+            <View style={styles.greetingDot} />
+            <Text style={styles.greetingText}>Good morning</Text>
+          </View>
+          <Text style={styles.headline}>Find the best{"\n"}restaurants near you</Text>
         </View>
-
-        <TouchableOpacity style={styles.notifBtn}>
-          <FontAwesome name="bell" size={22} color="#1a1a1a" />
+        <TouchableOpacity style={styles.notifBtn} activeOpacity={0.8}>
+          <Ionicons name="notifications-outline" size={20} color={COLORS.text} />
           <View style={styles.notifDot} />
         </TouchableOpacity>
       </View>
 
-      {/* Search Bar */}
+      {/* ── Search ── */}
       <View style={styles.searchWrapper}>
-        <FontAwesome name="search" size={18} color="#aaa" style={styles.searchIcon} />
+        <FontAwesome name="search" size={16} color={COLORS.textMuted} />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search restaurants, cuisines..."
-          placeholderTextColor="#bbb"
+          placeholder="Search restaurants..."
+          placeholderTextColor={COLORS.textMuted}
           value={search}
           onChangeText={setSearch}
+          returnKeyType="search"
         />
-        {search.length > 0 && (
-          <TouchableOpacity onPress={() => setSearch("")}>
-            <FontAwesome name="close" size={18} color="#bbb" style={styles.searchIcon} />
+        {search.length > 0 ? (
+          <TouchableOpacity onPress={() => setSearch("")} activeOpacity={0.7}>
+            <FontAwesome name="times-circle" size={16} color={COLORS.textMuted} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.micBtn} activeOpacity={0.85}>
+            <Ionicons name="mic-outline" size={15} color="#fff" />
           </TouchableOpacity>
         )}
       </View>
 
-      {/* ── Favourites ── */}
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>My Favourites</Text>
-        <TouchableOpacity>
-          <Text style={styles.seeAll}>See all</Text>
-        </TouchableOpacity>
-      </View>
+      {/* ── Category Pills ── */}
       <FlatList
-        data={favorite}
+        data={CATEGORIES}
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.contentContainerStyle}
-        renderItem={({ item }) => (
-          <View style={styles.contentContainerStyle}>
-            <FavoriteCard item={item} />
-          </View>
-        )}
+        contentContainerStyle={styles.categoryList}
+        renderItem={({ item }) => {
+          const isActive = activeCategory === item.id;
+          return (
+            <TouchableOpacity
+              style={isActive ? styles.categoryPillActive : styles.categoryPillInactive}
+              activeOpacity={0.8}
+              onPress={() => setActiveCategory(item.id)}
+            >
+              {item.emoji ? (
+                <Text style={{ fontSize: 13 }}>{item.emoji}</Text>
+              ) : (
+                <Ionicons
+                  name="home-outline"
+                  size={13}
+                  color={isActive ? "#fff" : "#555"}
+                />
+              )}
+              <Text
+                style={isActive ? styles.categoryTextActive : styles.categoryTextInactive}
+              >
+                {item.label}
+              </Text>
+            </TouchableOpacity>
+          );
+        }}
+      />
+
+      {/* ── My Favourites ── */}
+      <SectionHeader title="My Favourites" onPress={() => navigation.navigate("AllRestaurant", { type: "favorite" })} />
+      <FlatList
+        data={sections.favorite}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.horizontalList}
+        renderItem={({ item }) => <RestaurantCard item={item} />}
       />
 
       {/* ── Popular Near You ── */}
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Popular Near You</Text>
-        <TouchableOpacity>
-          <Text style={styles.seeAll}>See all</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.grid}>
-        <View style={styles.grid}>
-          {popular.map((item) => (
-            <View key={item.id} style={styles.gridItem}>
-              <PopularCard item={item} />
-            </View>
-          ))}
-        </View>
-      </View>
+      <SectionHeader title="Popular Near You" onPress={() => navigation.navigate("AllRestaurant", { type: "popular" })} />
+      <FlatList
+        data={sections.popular}
+        numColumns={2}
+        scrollEnabled={false}
+        keyExtractor={(item) => item.id}
+        columnWrapperStyle={styles.columnWrapper}
+        renderItem={({ item }) => <RestaurantCard item={item} />}
+      />
 
-      {/* ── Recommended For You ── */}
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Recommended For You</Text>
-        <TouchableOpacity>
-          <Text style={styles.seeAll}>See all</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.grid}>
-        <View style={styles.grid}>
-          {recommended.map((item) => (
-            <View key={item.id} style={styles.gridItem}>
-              <PopularCard item={item} />
-            </View>
-          ))}
-        </View>
-      </View>
+      {/* ── Recommended ── */}
+      <SectionHeader title="Recommended For You" onPress={() => navigation.navigate("AllRestaurant", { type: "recommended" })} />
+      <FlatList
+        data={sections.recommended}
+        numColumns={2}
+        scrollEnabled={false}
+        keyExtractor={(item) => item.id}
+        columnWrapperStyle={styles.columnWrapper}
+        renderItem={({ item }) => <RestaurantCard item={item} />}
+      />
 
       <View style={styles.bottomPad} />
+
     </ScrollView>
   );
 }

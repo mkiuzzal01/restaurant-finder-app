@@ -9,7 +9,7 @@ interface PopularCardProps {
   item: Restaurant;
 }
 
-export default function PopularCard({ item, }: PopularCardProps) {
+export default function RestaurantCard({ item, }: PopularCardProps) {
   const navigation = useNavigation<any>();
   return (
     <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("Restaurants", { id: item?.id })} activeOpacity={0.8}>

@@ -5,6 +5,12 @@ import RestaurantDetails from "@/screens/restaurant/RestaurantDetails";
 import FoodDetails from "@/screens/food/FoodDetails";
 import Favorites from "@/screens/favorites/Favorites";
 import Checkout from "@/screens/checkout/Checkout";
+import OrderHistory from "@/screens/order/OrderHistory";
+import Reviews from "@/screens/reviews/Reviews";
+import Settings from "@/screens/settings/Settings";
+import HelpAndSupport from "@/screens/help/HelpAndSupport";
+import AllRestaurant from "@/screens/restaurant/AllRestaurant";
+import AllFoods from "@/screens/food/AllFoods";
 
 const rootStack = createNativeStackNavigator({
   initialRouteName: "Tabs",
@@ -38,7 +44,43 @@ const rootStack = createNativeStackNavigator({
       options: {
         headerShown: false,
       },
-    }
+    },
+    OrderHistory: {
+      screen: OrderHistory,
+      options: {
+        headerShown: false,
+      },
+    },
+    Reviews: {
+      screen: Reviews,
+      options: {
+        headerShown: false,
+      },
+    },
+    Settings: {
+      screen: Settings,
+      options: {
+        headerShown: false,
+      },
+    },
+    HelpAndSupport: {
+      screen: HelpAndSupport,
+      options: {
+        headerShown: false,
+      },
+    },
+    AllRestaurant: {
+      screen: AllRestaurant,
+      options: {
+        headerShown: false,
+      },
+    },
+    AllFoods: {
+      screen: AllFoods,
+      options: {
+        headerShown: false,
+      },
+    },
   }
 });
 

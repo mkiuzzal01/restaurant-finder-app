@@ -1,136 +1,335 @@
+import { COLORS } from "@/style/Colors";
 import { StyleSheet } from "react-native";
 
+
 export const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.bg,
+    paddingTop: 50,
+  },
 
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    paddingVertical: 20,
+    marginBottom: 20,
+    marginTop: 4,
   },
-
-  greeting: {
-    fontSize: 20,
-    color: "#E8692A",
-    marginBottom: 4,
+  greetingTag: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    alignSelf: "flex-start",
+    backgroundColor: COLORS.primaryLight,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 20,
+    marginBottom: 8,
   },
-
+  greetingDot: {
+    width: 7,
+    height: 7,
+    borderRadius: 4,
+    backgroundColor: COLORS.primary,
+  },
+  greetingText: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: COLORS.primary,
+    letterSpacing: 0.3,
+  },
   headline: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "800",
-    color: "#1a1a1a",
-    lineHeight: 32,
-    width: "80%",
+    color: COLORS.text,
+    lineHeight: 28,
+    maxWidth: 220,
   },
   notifBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#f5f5f5",
-    alignItems: "center",
+    width: 42,
+    height: 42,
+    borderRadius: 14,
+    backgroundColor: COLORS.white,
     justifyContent: "center",
-    marginTop: 4,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    marginTop: 18,
   },
   notifDot: {
     position: "absolute",
-    top: 10,
-    right: 10,
+    top: 9,
+    right: 9,
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "#E24B4A",
-    borderWidth: 1.5,
-    borderColor: "#fff",
+    backgroundColor: COLORS.primary,
+    borderWidth: 2,
+    borderColor: COLORS.bg,
   },
 
   searchWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fcf0f0ff",
+    backgroundColor: COLORS.white,
     borderRadius: 14,
-    marginBottom: 24,
-    borderWidth: 0.5,
-    borderColor: "rgba(0,0,0,0.07)",
-  },
-  searchIcon: {
-    paddingHorizontal: 12,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    paddingHorizontal: 14,
+    height: 48,
+    marginBottom: 20,
+    gap: 10,
   },
   searchInput: {
     flex: 1,
-    fontSize: 15,
-    color: "#1a1a1a",
-    padding: 12,
-  },
-
-  sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginVertical: 10,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: "#1a1a1a",
-  },
-  seeAll: {
     fontSize: 14,
-    color: "#E8692A",
-    fontWeight: "500",
+    color: COLORS.text,
+    fontFamily: "System",
+  },
+  searchIconWrapper: {
+    // no extra style needed – icon placed inline
+  },
+  micBtn: {
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+    backgroundColor: COLORS.primary,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
-  contentContainerStyle: {
-    gap: 10,
-  },
-
+  // ─── Category Pills ───────────────────────────────────────────────
   categoryList: {
-    paddingHorizontal: 20,
-    paddingBottom: 16,
+    paddingBottom: 2,
     gap: 8,
+    marginBottom: 22,
   },
-  categoryChip: {
-    paddingHorizontal: 18,
+  categoryPillActive: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: "#f5f5f3",
-    borderWidth: 0.5,
-    borderColor: "rgba(0,0,0,0.07)",
+    backgroundColor: COLORS.primary,
   },
-  categoryChipActive: {
-    backgroundColor: "#E8692A",
-    borderColor: "#E8692A",
-  },
-  categoryText: {
-    fontSize: 13,
-    fontWeight: "500",
-    color: "#666",
+  categoryPillInactive: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   categoryTextActive: {
-    color: "#fff",
+    fontSize: 12,
+    fontWeight: "700",
+    color: COLORS.white,
+  },
+  categoryTextInactive: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#555555",
   },
 
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 10,
-  },
-  gridItem: {
-    width: "47.5%",
-    height: "100%",
-  },
 
-  // Empty state
-  emptyState: {
-    alignItems: "center",
-    paddingVertical: 40,
+  // ─── Horizontal Scroll ────────────────────────────────────────────
+  horizontalList: {
+    paddingBottom: 4,
     gap: 12,
-  },
-  emptyText: {
-    fontSize: 15,
-    color: "#bbb",
+    marginBottom: 24,
   },
 
+  // ─── Featured Card (horizontal) ──────────────────────────────────
+  featuredCard: {
+    width: 220,
+    borderRadius: 18,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    overflow: "hidden",
+  },
+  featuredCardImage: {
+    width: "100%",
+    height: 120,
+  },
+  cardBadge: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    backgroundColor: COLORS.white,
+    borderRadius: 8,
+    paddingHorizontal: 7,
+    paddingVertical: 3,
+    zIndex: 2,
+  },
+  cardBadgeText: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: COLORS.primary,
+  },
+  heartBtn: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    width: 26,
+    height: 26,
+    backgroundColor: "rgba(255,255,255,0.9)",
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 2,
+  },
+  cardBody: {
+    padding: 12,
+  },
+  cardName: {
+    fontSize: 13,
+    fontWeight: "800",
+    color: COLORS.text,
+    marginBottom: 4,
+    letterSpacing: -0.1,
+  },
+  cardMeta: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    marginBottom: 6,
+  },
+  cardMetaDot: {
+    width: 3,
+    height: 3,
+    borderRadius: 1.5,
+    backgroundColor: "#cccccc",
+  },
+  cardMetaText: {
+    fontSize: 11,
+    color: COLORS.textSecondary,
+  },
+  cardRating: {
+    fontSize: 11,
+    fontWeight: "700",
+    color: COLORS.primary,
+  },
+  tagRow: {
+    flexDirection: "row",
+    gap: 5,
+    flexWrap: "wrap",
+  },
+  tag: {
+    fontSize: 10,
+    fontWeight: "700",
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 6,
+    backgroundColor: COLORS.primaryLight,
+    color: COLORS.primary,
+    overflow: "hidden",
+  },
+  tagGreen: {
+    fontSize: 10,
+    fontWeight: "700",
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 6,
+    backgroundColor: COLORS.tagGreen,
+    color: COLORS.tagGreenText,
+    overflow: "hidden",
+  },
+  tagBlue: {
+    fontSize: 10,
+    fontWeight: "700",
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 6,
+    backgroundColor: COLORS.tagBlue,
+    color: COLORS.tagBlueText,
+    overflow: "hidden",
+  },
+
+  // ─── Grid Cards ───────────────────────────────────────────────────
+  columnWrapper: {
+    justifyContent: "space-between",
+    paddingBottom: 18,
+  },
+  gridCard: {
+    width: 160,
+    borderRadius: 16,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    overflow: "hidden",
+  },
+  gridCardImage: {
+    width: "100%",
+    height: 90,
+  },
+  gridCardBody: {
+    padding: 10,
+  },
+  gridCardName: {
+    fontSize: 12,
+    fontWeight: "800",
+    color: COLORS.text,
+    marginBottom: 3,
+    letterSpacing: -0.1,
+  },
+  gridCardMeta: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 3,
+    marginBottom: 5,
+  },
+  gridCardMetaText: {
+    fontSize: 10,
+    color: COLORS.textMuted,
+  },
+  starsText: {
+    fontSize: 9,
+    color: COLORS.primary,
+    letterSpacing: -1,
+  },
+  gridTag: {
+    fontSize: 9,
+    fontWeight: "700",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 5,
+    backgroundColor: COLORS.primaryLight,
+    color: COLORS.primary,
+    alignSelf: "flex-start",
+    overflow: "hidden",
+  },
+  gridTagGreen: {
+    fontSize: 9,
+    fontWeight: "700",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 5,
+    backgroundColor: COLORS.tagGreen,
+    color: COLORS.tagGreenText,
+    alignSelf: "flex-start",
+    overflow: "hidden",
+  },
+  gridTagBlue: {
+    fontSize: 9,
+    fontWeight: "700",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 5,
+    backgroundColor: COLORS.tagBlue,
+    color: COLORS.tagBlueText,
+    alignSelf: "flex-start",
+    overflow: "hidden",
+  },
+
+  // ─── Bottom padding ───────────────────────────────────────────────
   bottomPad: {
-    height: 32,
+    height: 40,
   },
 });

@@ -10,9 +10,8 @@ import { styles } from './style.profile'
 import { useNavigation } from '@react-navigation/native'
 
 const menuItems = [
-  { id: '1', title: 'My Favorites', navigate: 'Favorites' },
-  { id: '2', title: 'My Reviews', navigate: 'Reviews' },
   { id: '3', title: 'Order History', navigate: 'OrderHistory' },
+  { id: '2', title: 'My Reviews', navigate: 'Reviews' },
   { id: '4', title: 'Settings', navigate: 'Settings' },
   { id: '5', title: 'Help & Support', navigate: 'HelpAndSupport' },
 ]
